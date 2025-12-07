@@ -1,10 +1,27 @@
-import Header from './components/Header';
-import Footer from './components/Footer';
-import ApiRequestSection from './components/ApiRequestSection';
-import ApiResponseSection from './components/ApiResponseSection';
-import FeaturesSection from './components/FeaturesSection';
+'use client';
+
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import ApiRequestSection from '../components/ApiRequestSection';
+import ApiResponseSection from '../components/ApiResponseSection';
+import FeaturesSection from '../components/FeaturesSection';
 
 export default function Home() {
+  const handleTestEncode = async () => {
+    const input = document.getElementById('testHtmlInput').value;
+    const encodedInput = encodeURIComponent(input);
+    try {
+      const response = await fetch(`/api/encode?html=${encodedInput}`);
+      const data = await response.json();
+      document.getElementById('testResult').textContent = JSON.stringify(data, null, 2);
+    } catch (error) {
+      document.getElementById('testResult').textContent = JSON.stringify({
+        status: 'error',
+        message: 'Failed to encode HTML'
+      }, null, 2);
+    }
+  };
+
   return (
     <>
       <Header />
@@ -53,20 +70,7 @@ export default function Home() {
             </div>
             
             <button 
-              onClick={async () => {
-                const input = document.getElementById('testHtmlInput').value;
-                const encodedInput = encodeURIComponent(input);
-                try {
-                  const response = await fetch(`/api/encode?html=${encodedInput}`);
-                  const data = await response.json();
-                  document.getElementById('testResult').textContent = JSON.stringify(data, null, 2);
-                } catch (error) {
-                  document.getElementById('testResult').textContent = JSON.stringify({
-                    status: 'error',
-                    message: 'Failed to encode HTML'
-                  }, null, 2);
-                }
-              }}
+              onClick={handleTestEncode}
               className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium border border-blue-700 transition-colors"
             >
               Test Encode
