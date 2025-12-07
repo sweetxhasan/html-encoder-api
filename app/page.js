@@ -1,8 +1,8 @@
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import ApiRequestSection from '@/components/ApiRequestSection';
-import ApiResponseSection from '@/components/ApiResponseSection';
-import FeaturesSection from '@/components/FeaturesSection';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import ApiRequestSection from './components/ApiRequestSection';
+import ApiResponseSection from './components/ApiResponseSection';
+import FeaturesSection from './components/FeaturesSection';
 
 export default function Home() {
   return (
